@@ -1,0 +1,90 @@
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 14px;
+}
+
+.main {
+  display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  flex-shrink: 0;
+  height: 100%;
+}
+
+.container {
+  flex-grow: 1;
+  padding: 16px;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.sidebar-item {
+  padding: 1em;
+  display: block;
+  transition: background-color .15s;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(255, 255, 255, .1);
+}
+
+.sidebar-title {
+  display: flex;
+  font-size: 1.2em;
+  justify-content: space-between;
+  cursor: pointer;
+}
+
+.sidebar-title span i {
+  display: inline-block;
+  width: 1.5em;
+}
+
+.sidebar-title .toggle-btn {
+  transition: transform .3s;
+}
+
+.sidebar-content {
+  padding-top: .25em;
+  height: 0;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.sidebar .open .sidebar-title .toggle-btn {
+  transform: rotate(180deg);
+}
+
+.sidebar-item.open .sidebar-content {
+  height: auto;
+}
+
+.table-header {
+  text-align: left;
+  padding: 8px;
+}
+
+thead {
+  position: sticky;
+  top: 0px;
+  background-color: white;
+}
+
+.table-row {
+  text-align: left;
+  padding: 8px;
+}
+
+tr {
+  border: 1px solid;
+}
+
+table {
+  border-collapse: collapse;
+  overflow-y: auto;
+  display: block;
+  height: 89.2vh;
+}
