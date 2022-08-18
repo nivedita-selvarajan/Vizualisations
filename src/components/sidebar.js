@@ -2,24 +2,24 @@ import { useState } from "react"
 import React from "react";
 
 export default function Sidebar({handleChange})  {
-  const [open, setOpen] = useState(false)
+  const [open, setOpen] = useState(true)
+  const [activeMenu, setActiveMenu] = useState('rawTable')
   let menuItems = [
     {
       title: "Raw Table",
-      item: "rawTable"
+      type: "rawTable"
     },
     {
       title: "Age vs Fare",
-      item: "ageVsFare"
+      type: "ageVsFare"
     },
     {
       title: "Survivals vs Class",
-      item: "survivalsVsClass"
+      type: "survivalsVsClass"
     }
   ]
   return (
-    <div className="sidebar">
-      <div className={open ? "sidebar-item open" : "sidebar-item"}>
+      <div className={open ? "sidebar open" : "sidebar"}>
         <div className="sidebar-title" onClick={() => setOpen(!open)}>
           <span>
             Visualizations
@@ -27,9 +27,18 @@ export default function Sidebar({handleChange})  {
           <i className="bi-chevron-down toggle-btn"></i>
         </div>
         <div className="sidebar-content">
-          { menuItems.map((item, index)  => <div key={index} onClick={() => handleChange(item.item)}>{ item.title }</div>) }
+          { menuItems.map((item, index)  => 
+            <div 
+              className={activeMenu === item.type ? 'sidebar-item active' : 'sidebar-item'}
+              key={index}
+              onClick={() => {
+                setActiveMenu(item.type);
+                handleChange(item);
+              }}>
+              { item.title }
+            </div>)
+          }
         </div>
       </div>
-    </div>
   )
 }

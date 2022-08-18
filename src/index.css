@@ -1,3 +1,12 @@
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  height: 100vh;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
   font-size: 14px;
@@ -5,61 +14,77 @@ body {
 
 .main {
   display: flex;
+  height: 100vh;
 }
 
 .sidebar {
   width: 200px;
   flex-shrink: 0;
-  height: 100%;
-}
-
-.container {
-  flex-grow: 1;
-  padding: 16px;
-  display: flex;
-  justify-content: center;
-  text-align: center;
-}
-
-.sidebar-item {
-  padding: 1em;
-  display: block;
-  transition: background-color .15s;
-}
-
-.sidebar-item:hover {
-  background-color: rgba(255, 255, 255, .1);
+  overflow: auto;
+  box-shadow: 0 1px 8px 0 rgba(0, 0, 0, 0.16);
+  padding: 18px;
 }
 
 .sidebar-title {
   display: flex;
-  font-size: 1.2em;
+  font-size: 16px;
   justify-content: space-between;
   cursor: pointer;
+  padding: 10px 0;
 }
 
 .sidebar-title span i {
   display: inline-block;
-  width: 1.5em;
 }
 
 .sidebar-title .toggle-btn {
   transition: transform .3s;
 }
 
+.sidebar.open .sidebar-title .toggle-btn {
+  transform: rotate(180deg);
+}
+
+.sidebar-title:hover {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
 .sidebar-content {
-  padding-top: .25em;
   height: 0;
   overflow: hidden;
   cursor: pointer;
 }
 
-.sidebar .open .sidebar-title .toggle-btn {
-  transform: rotate(180deg);
+.sidebar.open .sidebar-content {
+  height: auto;
+  margin-left: 6px;
 }
 
-.sidebar-item.open .sidebar-content {
-  height: auto;
+.sidebar-item {
+  padding: 4px 0;
+}
+
+.sidebar-item:hover {
+  background-color: rgba(0, 0, 0, 0.03);
+}
+
+.sidebar-item.active {
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+.container {
+  flex-grow: 1;
+  margin: 26px 34px;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+}
+
+table {
+  border-collapse: collapse;
+  overflow-y: auto;
+  display: block;
+  margin-top: 6px;
 }
 
 .table-header {
@@ -82,9 +107,6 @@ tr {
   border: 1px solid;
 }
 
-table {
-  border-collapse: collapse;
-  overflow-y: auto;
-  display: block;
-  height: 89.2vh;
+.lineGraph {
+  padding: 24px 24px 0 24px;
 }

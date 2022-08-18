@@ -2,15 +2,17 @@ import titanicData from '../data/titanic.json'
 import { Chart } from "react-google-charts";
 export default function lineGraph() {
 
-  titanicData.sort((a,b) => a.Age - b.Age);
-  let data = [['Age','Fare']].concat(titanicData.map( ({Age, Fare}) => {
-    if(Age != '') {
-      return [Number(Age), Number(Fare)]
+  const sortedData = titanicData.slice().sort((a,b) => a.Age - b.Age);
+  let data = [['Age','Fare']].concat(sortedData.map( ({Age, Fare}) => {
+    let graphData = []
+    if(Age !== '') {
+      graphData = [Number(Age), Number(Fare)]
+    } else {
+      graphData = ''
     }
+    return graphData
   }));
-
-  const tdata = data.filter((element ) => element !== undefined)
-
+  const tdata = data.filter((element ) => element)
   const options = {
     series: {
       0: { axis: "Fare" }
@@ -19,18 +21,17 @@ export default function lineGraph() {
       y: {
         Fare: { label: "Fare" }
       },
-    },
-    legend: { position: "none" },
+    }
   }
 
   return (
     <Chart
-          width="80%"
-          height="400px"
-          chartType="Line"
-          loader={<div>Loading Chart</div>}
-          data={tdata}
-          options={options}
-      />
+      className="lineGraph"
+      chartType="Line"
+      height="400px"
+      loader={<div>Loading Chart</div>}
+      data={tdata}
+      options={options}
+    />
   )
 }

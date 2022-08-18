@@ -2,33 +2,34 @@ import titanicData from '../data/titanic.json'
 import { Chart } from "react-google-charts";
 
 export default function histogram() {
-  let histogramData = [['Number of Survivals', 'Passenger class']].concat(titanicData.map(({Survived, Pclass}) => {
-    if(Survived != 0) {
-      return [Survived, Pclass]
+  let histogramData = [['survivals', 'class']].concat(titanicData.map(({Survived, Pclass}) => {
+    let data = []
+    if(Number(Survived) !== 0) {
+      data = [Survived, Pclass]
+    } else {
+      data = ''
     }
+    return data
   }));
 
-  const hdata = histogramData.filter((element ) => element !== undefined)
+  const hdata = histogramData.filter((element ) => element)
 
   const hoptions = {
+    title: "Total number of survivals per passenger class",
     hAxis: {
-      ticks: [1,2,3,4],
-      minTextSpacing: 1
+      ticks: [1,2,3,4]
     },
-    bar: { gap: 0 },
     histogram: {
-      bucketSize: 0.5,
-      hideBucketItems: true
+      bucketSize: 0.5
     },
-    colors: ['#e7711c'],
     legend: { position: "none" }
   }
 
   return (
     <Chart
       chartType="Histogram"
-      width="90%"
-      height="400px"
+      height="490px"
+      loader={<div>Loading Chart</div>}
       data={hdata}
       options={hoptions}
     />

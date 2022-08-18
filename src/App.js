@@ -6,23 +6,24 @@ import Histogram from './components/histogram';
 import { useState } from 'react';
 
 function App() {
-  const [selectedMenu, setData] = useState('');
+  const [selectedMenu, setData] = useState({ title: 'Raw Table', type: 'rawTable' });
   const parentHandleChange = (e) => {
     setData(e);
   }
   let element;
-  if (selectedMenu === 'rawTable') {
-    element = <DataTable />;
-  } else if(selectedMenu === 'ageVsFare') {
+  if (selectedMenu.type === 'rawTable') {
+    element = <DataTable/>;
+  } else if(selectedMenu.type === 'ageVsFare') {
     element = <LineGraph/>;
-  } else if(selectedMenu === 'survivalsVsClass') {
+  } else if(selectedMenu.type === 'survivalsVsClass') {
     element = <Histogram/>;
   }
 
   return (
-    <div className="main">
+    <div className='main'>
       <Sidebar handleChange={parentHandleChange}/>
       <div className='container'>
+        <h2>{selectedMenu.title}</h2>
         {element}
       </div>
     </div>
